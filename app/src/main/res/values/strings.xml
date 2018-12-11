@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">MobeliteTest</string>
+    <string name="app_name">Mobelite Test</string>
+    <string name="title_posts_activity">Posts</string>
+    <string name="title_postdetails_activity">Details</string>
 </resources>

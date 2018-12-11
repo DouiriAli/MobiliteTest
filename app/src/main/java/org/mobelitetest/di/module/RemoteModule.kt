@@ -1,7 +1,5 @@
 package org.mobelitetest.di.module
 
-import android.app.Application
-import android.content.Context
 import dagger.Module
 import dagger.Provides
 import org.mobelitetest.BuildConfig

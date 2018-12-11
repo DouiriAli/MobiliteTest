@@ -4,6 +4,8 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'kotlin-kapt'
+
 android {
     compileSdkVersion versions.target_sdk
     defaultConfig {
@@ -22,8 +24,12 @@ android {
         }
 
         debug{
-            buildConfigField "String", "BASE_URL", "https://jsonplaceholder.typicode.com/"
+            buildConfigField "String", "BASE_URL", "\"https://jsonplaceholder.typicode.com/\""
         }
+    }
+
+    packagingOptions {
+        exclude 'META-INF/rxjava.properties'
     }
 }
 

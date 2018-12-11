@@ -1,45 +1,32 @@
 package org.mobelitetest.ui.base
 
-import android.app.ProgressDialog
-import android.support.design.widget.Snackbar
+import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
-import org.mobelitetest.utils.DialogUtil
+import org.mobelitetest.R
 
 
 /**
- * Created by Ali DOUIRI on 09/12/2018.
+ * Created by Ali DOUIRI on 11/12/2018.
  * my.alidouiri@gmail.com
  */
-open abstract class BaseActivity : AppCompatActivity(), IView {
+abstract class BaseActivity : AppCompatActivity() {
 
-    private var mProgressDialog: ProgressDialog? = null
-
-    override fun showLoading() {
-
-        hideLoading()
-        mProgressDialog = DialogUtil.showLoadingDialog(this)
-    }
-
-    override fun hideLoading() {
-
-        if (mProgressDialog != null && mProgressDialog!!.isShowing) {
-            mProgressDialog?.cancel()
-        }
-
-    }
-
-    override fun showError(errorMessage: String) {
-
-        Snackbar.make(findViewById(android.R.id.content), errorMessage, Snackbar.LENGTH_LONG)
-                .show()
-
-    }
-
-    override fun showError(errorId: Int) {
-
-        Snackbar.make(findViewById(android.R.id.content), getString(errorId), Snackbar.LENGTH_LONG)
-                .show()
+    override fun onResume() {
+        super.onResume()
+        setUp()
     }
 
     protected abstract fun setUp()
+
+    fun switchFragment(mFragment: Fragment, mStack: Boolean) {
+
+        val transaction = supportFragmentManager.beginTransaction()
+
+        transaction.replace(R.id.content, mFragment, mFragment.javaClass.name.toString())
+
+        if (mStack)
+            transaction.addToBackStack(mFragment.javaClass.name.toString())
+
+        transaction.commit()
+    }
 }
